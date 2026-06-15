@@ -65,7 +65,37 @@
     background-size:cover;
     background-repeat:no-repeat;
     }
+.fade-out{
+  animation:fadeOut 1.2s forwards;
+}
 
+.fade-in{
+  animation:fadeIn 1.5s forwards;
+}
+
+@keyframes fadeOut{
+  0%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(1.1);
+  }
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity:0;
+    transform:translateY(40px);
+  }
+
+  100%{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
     .hero h1{
       font-size:4rem;
     }
@@ -104,6 +134,7 @@
     }
     #acara{
     display:none;
+    opacity:0;
     }
     .section-gold{
       background:linear-gradient(135deg,#2c1a0f,#5a3b1f);
@@ -277,22 +308,35 @@
     },1000);
   </script>
   <script>
-    function openInvitation(){
+   function openInvitation(){
 
-      // sembunyikan halaman cover
-      document.getElementById("cover").style.display = "none";
+  const cover = document.getElementById("cover");
+  const acara = document.getElementById("acara");
 
-      // tampilkan halaman acara
-      document.getElementById("acara").style.display = "flex";
+  // animasi cover hilang
+  cover.classList.add("fade-out");
 
-      // scroll ke halaman acara
-      document.getElementById("acara").scrollIntoView({
-        behavior:"smooth"
-      });
+  setTimeout(() => {
 
-      // aktifkan scroll kembali
-      document.body.style.overflow = "auto";
-    }
+    // sembunyikan cover
+    cover.style.display = "none";
+
+    // tampilkan halaman acara
+    acara.style.display = "flex";
+
+    // animasi muncul
+    acara.classList.add("fade-in");
+
+    // scroll aktif
+    document.body.style.overflow = "auto";
+
+    // scroll halus
+    acara.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  },1000);
+}
   </script>
 </body>
 </html>
